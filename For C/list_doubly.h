@@ -38,8 +38,8 @@ int  dlist_front(List *list);
 int  dlist_back(List *list);
 void dlist_popFront(List *list);
 void dlist_popBack(List *list);
-void dlist_remove(List *list, int element);
-void dlist_removeAt(List *list, int index);
+// void dlist_remove(List *list, int element);
+// void dlist_removeAt(List *list, int index);
 
 /* Function definition */
 

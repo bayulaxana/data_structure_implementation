@@ -37,3 +37,4 @@ void bst_delete(BST *bst, int key);
 
 BSTNode* __bst_insert(BSTNode *root, int value);
 BSTNode* __bst_find(BSTNode *root, int key);
+BSTNode* __bst_delete(BSTNode *root, int key);
