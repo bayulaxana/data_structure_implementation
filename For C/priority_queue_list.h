@@ -50,7 +50,7 @@ void pqueue_push(PriorityQueue *pqueue, int value)
     newNode->data = value;
     newNode->next = NULL;
 
-    if (!pqueue_isEmpty(pqueue)) {
+    if (pqueue_isEmpty(pqueue)) {
         pqueue->_top = newNode;
         return;
     }
