@@ -7,7 +7,7 @@ using namespace std;
 #include "priority_queue_list.hpp"
 int main(int argc, char const *argv[])
 {
-    PriorityQueue<> pq;
+    PriorityQueue<> pq; //default holds int data type
     pq.push(12);
     pq.push(13);
     pq.push(1);

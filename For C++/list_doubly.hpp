@@ -18,8 +18,7 @@ struct ListDoubly
     } *_head, *_tail;
     unsigned _size;
 
-    ListDoubly()
-    {
+    ListDoubly() {
         _head = _tail = NULL;
         _size = 0;
     }

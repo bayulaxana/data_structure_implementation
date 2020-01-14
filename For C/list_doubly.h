@@ -36,8 +36,8 @@ void dlist_pushBack(List *list, int value);
 void dlist_insert(List *list, unsigned index, int value);
 int  dlist_front(List *list);
 int  dlist_back(List *list);
-// void dlist_popFront(List *list);
-// void dlist_popBack(List *list);
+void dlist_popFront(List *list);
+void dlist_popBack(List *list);
 // void dlist_remove(List *list, int element);
 // void dlist_removeAt(List *list, int index);
 
@@ -147,4 +147,42 @@ int dlist_back(List *list) {
         return (list->_tail->data);
     }
     return 0;
+}
+
+void dlist_popFront(List *list)
+{
+    if (!dlist_isEmpty(list)) {
+        DListNode *temp = list->_head;
+        if (list->_head == list->_tail) {
+            list->_head = NULL;
+            list->_tail = NULL;
+            free(temp);
+        }
+        else {
+            list->_head = list->_head->next;
+            list->_head->prev = NULL;
+            free(temp);
+        }
+        list->_size--;
+    }
+}
+
+void dlist_popBack(List *list)
+{
+    if (!dlist_isEmpty(list)) {
+        DListNode *temp;
+        if (list->_head == list->_tail) {
+            temp = list->_head;
+            list->_head = NULL;
+            list->_tail = NULL;
+            free(temp);
+        }
+        else {
+            temp = list->_tail;
+            list->_tail = list->_tail->prev;
+            list->_tail->next = NULL;
+            free(temp);
+        }
+        list->_size--;
+    }
 }
