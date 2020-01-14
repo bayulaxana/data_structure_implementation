@@ -9,7 +9,7 @@
 /* Structure of Doubly Linked List */
 
 template <typename T=int>
-struct ListDoubly
+struct List
 {
     // Node Structure
     struct DListNode {
@@ -18,7 +18,7 @@ struct ListDoubly
     } *_head, *_tail;
     unsigned _size;
 
-    ListDoubly() {
+    List() {
         _head = _tail = NULL;
         _size = 0;
     }

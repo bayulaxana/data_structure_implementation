@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#define PRIORITY_QUEUE
+#define SINGLY_LIST
 
 #ifdef PRIORITY_QUEUE
 #include "priority_queue_list.hpp"
@@ -16,6 +16,49 @@ int main(int argc, char const *argv[])
         cout << pq.top() << endl;
         pq.pop();
     }
+    return 0;
+}
+#endif
+
+#ifdef SINGLY_LIST
+#include "list_singly.hpp"
+int main(int argc, char const *argv[])
+{
+    SinglyList<long long> myList;
+    
+    myList.pushBack(5);
+    myList.pushBack(6);
+    myList.pushBack(7);
+    myList.pushFront(11);
+    myList.pushFront(10);
+    myList.pushFront(14);
+
+    myList.popBack();
+
+    while (!myList.isEmpty()) {
+        cout << myList.front() << endl;
+        myList.popFront();
+    }
+
+    SinglyList<char> myList2;
+    myList2.pushBack('A');
+    myList2.pushBack('V');
+    myList2.pushBack('L');
+    myList2.pushBack('X');
+    myList2.pushFront(' ');
+    myList2.pushFront('E');
+    myList2.pushFront('E');
+    myList2.pushFront('R');
+    myList2.pushFront('T');
+    myList2.pushFront('T');
+
+    myList2.popBack(); myList2.popFront();
+
+    while (!myList2.isEmpty()) {
+        cout << myList2.front();
+        myList2.popFront();
+    }
+    puts("");
     return 0;
 }
 #endif

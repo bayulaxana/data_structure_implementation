@@ -56,6 +56,29 @@ int main()
         slist_popFront(&myList);
     }
     printf("\n");
+
+    SinglyList myList2;
+    slist_init(&myList2);
+
+    slist_pushBack(&myList2, 'A');
+    slist_pushBack(&myList2, 'V');
+    slist_pushBack(&myList2, 'L');
+    slist_pushBack(&myList2, 'X');
+    slist_pushFront(&myList2, ' ');
+    slist_pushFront(&myList2, 'E');
+    slist_pushFront(&myList2, 'E');
+    slist_pushFront(&myList2, 'R');
+    slist_pushFront(&myList2, 'T');
+    slist_pushFront(&myList2, 'X');
+
+    slist_popBack(&myList2);
+    slist_popFront(&myList2);
+
+    while(!slist_isEmpty(&myList2)) {
+        printf("%c", slist_front(&myList2));
+        slist_popFront(&myList2);
+    }
+    puts("");
     return 0;
 }
 #endif

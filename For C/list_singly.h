@@ -72,18 +72,16 @@ void slist_pushBack(SinglyList *list, int value)
     SListNode *newNode = (SListNode*) malloc(sizeof(SListNode));
     if (newNode) {
         list->_size++;
-        if (slist_isEmpty(list)) {
-            newNode->data = value;
-            newNode->next = NULL;
+        newNode->data = value;
+        newNode->next = NULL;
+        
+        if (slist_isEmpty(list)) 
             list->_head = newNode;
-        }
         else {
             SListNode *temp = list->_head;
             while (temp->next != NULL) 
                 temp = temp->next;
 
-            newNode->data = value;
-            newNode->next = NULL;
             temp->next = newNode;
         }
     }
