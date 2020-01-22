@@ -1,10 +1,19 @@
-/*
--- Created by Bayu Laksana on 9 January 2019
--- Implemented for C++ (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT Queue (Queue menggunakan Linked List)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C++
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
+#include <iostream>
+
+using namespace std;
 
 /* Structure of Queue using List */
 
@@ -71,3 +80,22 @@ struct Queue
         return _size;
     }
 };
+
+int main(int argc, char const *argv[])
+{
+    char str[23];
+    Queue<int> myq;
+    
+    int n = 3;
+    while (n--) {
+        int xx;
+        scanf("%d", &xx);
+        myq.push(xx);
+    }
+
+    while (!myq.isEmpty()) {
+        printf("%d\n", myq.front());
+        myq.pop();
+    }
+    return 0;
+}

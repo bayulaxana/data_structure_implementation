@@ -1,27 +1,32 @@
-/*
--- Created by Bayu Laksana on 9 January 2019
--- Implemented for C++ (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT List (Doubly Linked List)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C++
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
+#include <iostream>
+
+using namespace std;
 
 /* Structure of Doubly Linked List */
 
 template <typename T=int>
 struct List
 {
+private:
     // Node Structure
     struct DListNode {
         T data;
         DListNode *next, *prev;
     } *_head, *_tail;
     unsigned _size;
-
-    List() {
-        _head = _tail = NULL;
-        _size = 0;
-    }
 
     // Utility function
     DListNode* __createNode(T value)
@@ -35,6 +40,12 @@ struct List
         newNode->prev = NULL;
 
         return (DListNode*) newNode;
+    }
+
+public:
+    List() {
+        _head = _tail = NULL;
+        _size = 0;
     }
 
     bool isEmpty() {
@@ -75,7 +86,7 @@ struct List
         }
     }
 
-    void insert(T value, unsigned index)
+    void insertAt(T value, unsigned index)
     {
         if (index == 0) {
             pushFront(value);
@@ -166,3 +177,35 @@ struct List
         return _size;
     }
 };
+
+int main(int argc, char const *argv[])
+{
+    List<char> myList;
+    
+    myList.pushBack('A');
+    myList.pushBack('B');
+    myList.pushBack('C');
+    myList.pushBack('D');
+
+    myList.pushFront('W');
+    myList.pushFront('X');
+    myList.pushFront('Y');
+    myList.pushFront('Z');
+
+    cout << myList.size() << endl;
+
+    myList.popBack();
+    myList.popFront();
+
+    myList.insertAt('G', 2);
+
+    cout << myList.size() << endl;
+
+    while (!myList.isEmpty()) {
+        cout << myList.front();
+        myList.popFront();
+    }
+    cout << endl << myList.size() << endl;
+    printf("\n");
+    return 0;
+}

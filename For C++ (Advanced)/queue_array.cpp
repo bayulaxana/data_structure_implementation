@@ -1,20 +1,31 @@
-/*
--- Created by Bayu Laksana on 9 January 2019
--- Implemented for C++ (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT QueueArray (Queue menggunakan array)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C++
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
+#include <iostream>
+
+using namespace std;
 
 /* Structure of Queue using Array */
 
 template <int queueSize, typename T=int>
 struct QueueArray
 {
+private:
     T *_element;
     int _front, _rear;
     unsigned _size, _capacity;
 
+public:
     QueueArray()
     {
         _element = (T*) malloc(sizeof(T) * queueSize);
@@ -60,3 +71,19 @@ struct QueueArray
         return _size;
     }
 };
+
+int main(int argc, char const *argv[])
+{
+    QueueArray<100, char> myq;
+    myq.push('X');
+    myq.push('A');
+    myq.push('K');
+    myq.push('U');
+    myq.pop();
+
+    while (!myq.isEmpty()) {
+        cout << myq.front() << endl;
+        myq.pop();
+    }
+    return 0;
+}

@@ -1,20 +1,32 @@
-/*
--- Created by Bayu Laksana on 9 January 2019
--- Implemented for C++ (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT StackArray (Stack menggunakan static Array)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C++
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
+
 
 #include <stdlib.h>
+#include <iostream>
+
+using namespace std;
 
 /* Structure of Stack using Array */
 
 template <int stackSize, typename T=int>
 struct StackArray
 {
+private:
     T *_element;
     int _topIndex;
     int _size, _capacity;
 
+public:
     StackArray() 
     {
         _element  = (T*) malloc(sizeof(T) * stackSize);
@@ -50,3 +62,14 @@ struct StackArray
         exit(-1);
     }
 };
+
+int main()
+{
+    StackArray<100, double> mystc;
+    mystc.push(2.32);
+    mystc.push(3.30);
+    mystc.push(9.1);
+    mystc.pop();
+    cout << mystc.top() << endl;
+    return 0;
+}

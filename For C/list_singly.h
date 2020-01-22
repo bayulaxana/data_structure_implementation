@@ -29,8 +29,11 @@ void slist_pushFront(SinglyList *list, int value);
 void slist_popFront(SinglyList *list);
 void slist_pushBack(SinglyList *list, int value);
 void slist_popBack(SinglyList *list);
+void slist_insertAt(SinglyList *list, int index, int value);
+// void slist_removeAt(SinglyList *list, int index);
 int  slist_front(SinglyList *list);
 int  slist_back(SinglyList *list);
+int  slist_getAt(SinglyList *list, int index);
 
 /* Function definition below */
 
@@ -81,7 +84,6 @@ void slist_pushBack(SinglyList *list, int value)
             SListNode *temp = list->_head;
             while (temp->next != NULL) 
                 temp = temp->next;
-
             temp->next = newNode;
         }
     }
@@ -103,6 +105,33 @@ void slist_popBack(SinglyList *list)
     }
 }
 
+void slist_insertAt(SinglyList *list, int index, int value)
+{
+    if (slist_isEmpty(list) || index >= list->_size) {
+        slist_pushBack(list, value);
+        return;    
+    }
+    else if (index == 0) {
+        slist_pushFront(list, value);
+        return;
+    }
+    
+    SListNode *newNode = (SListNode*) malloc(sizeof(SListNode));
+    if (newNode) {
+        SListNode *temp = list->_head;
+        int _i = 0;
+        
+        while (temp->next != NULL && _i < index-1) {
+            temp = temp->next;
+            _i++;
+        }
+        newNode->data = value;
+        newNode->next = temp->next;
+        temp->next = newNode;
+        list->_size++;
+    }
+}
+
 int slist_front(SinglyList *list)
 {
     if (!slist_isEmpty(list)) {
@@ -117,6 +146,20 @@ int slist_back(SinglyList *list)
         SListNode *temp = list->_head;
         while (temp->next != NULL) 
             temp = temp->next;
+        return temp->data;
+    }
+    return 0;
+}
+
+int slist_getAt(SinglyList *list, int index)
+{
+    if (!slist_isEmpty(list)) {
+        SListNode *temp = list->_head;
+        int _i = 0;
+        while (temp->next != NULL && _i < index) {
+            temp = temp->next;
+            _i++;
+        }
         return temp->data;
     }
     return 0;

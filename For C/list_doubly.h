@@ -33,7 +33,7 @@ void dlist_init(List *list);
 bool dlist_isEmpty(List *list);
 void dlist_pushFront(List *list, int value);
 void dlist_pushBack(List *list, int value);
-void dlist_insert(List *list, unsigned index, int value);
+void dlist_insertAt(List *list, unsigned index, int value);
 int  dlist_front(List *list);
 int  dlist_back(List *list);
 void dlist_popFront(List *list);
@@ -101,7 +101,7 @@ void dlist_pushBack(List *list, int value)
     }
 }
 
-void dlist_insert(List *list, unsigned index, int value)
+void dlist_insertAt(List *list, unsigned index, int value)
 {
     if (index == 0) { 
         dlist_pushFront(list, value);

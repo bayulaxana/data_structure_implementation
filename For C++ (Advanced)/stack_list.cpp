@@ -1,0 +1,82 @@
+/**
+ * Implementasi ADT Stack (Stack menggunakan Linked List)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C++
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
+
+#include <stdlib.h>
+#include <iostream>
+
+using namespace std;
+
+/* Structure of Stack using List */
+
+template <typename T=int>
+struct Stack
+{
+private:
+    // Node structure
+    struct StackNode {
+        T data;
+        StackNode *next;
+    } *_top;
+    unsigned _size;
+
+public:
+    Stack() 
+    {
+        _size = 0;
+        _top = nullptr;
+    }
+
+    bool isEmpty() {
+        return (_top == nullptr);
+    }
+
+    void push(T value)
+    {
+        StackNode *newNode = (StackNode*) malloc(sizeof(StackNode));
+        if (newNode) {
+            _size++;
+            if (isEmpty()) newNode->next = NULL;
+            else newNode->next = _top;
+
+            newNode->data = value;
+            _top = newNode;
+        }
+    }
+
+    void pop()
+    {
+        if (!isEmpty()) {
+            StackNode *temp = _top;
+            _top = _top->next;
+            free(temp);
+            _size--;
+        }
+    }
+
+    T top()
+    {
+        if (!isEmpty())
+            return _top->data;
+        exit(-1);
+    }
+};
+
+int main(int argc, char const *argv[])
+{
+    Stack<double> mystc;
+    mystc.push(2.3);
+    mystc.push(3.34);
+    mystc.push(9.1);
+    mystc.pop();
+    cout << mystc.top() << endl;
+    return 0;
+}
