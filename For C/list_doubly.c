@@ -1,13 +1,19 @@
-/*
--- Created by Bayu Laksana on 20 December 2019
--- Implemented for C (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT List (Doubly Linked List)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
 #include <stdbool.h>
 
-/* Node structure */
+/* Struktur Node */
 
 typedef struct dnode_t {
     int data;
@@ -16,7 +22,7 @@ typedef struct dnode_t {
         *prev;
 } DListNode;
 
-/* Actual structure */
+/* Struktur ADT List */
 
 typedef struct dlist_t {
     DListNode           \
@@ -185,4 +191,42 @@ void dlist_popBack(List *list)
         }
         list->_size--;
     }
+}
+
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    // Buat objek List
+    List myList;
+
+    // PENTING! Jangan lupa diinisialisasi
+    dlist_init(&myList);
+
+    // Gunakan operasi linked list
+    dlist_pushBack(&myList, 1);
+    dlist_pushBack(&myList, 2);
+    dlist_pushBack(&myList, 3);
+    dlist_pushBack(&myList, 4);
+
+    dlist_pushFront(&myList, 10);
+    dlist_pushFront(&myList, 9);
+    dlist_pushFront(&myList, 8);
+    dlist_pushFront(&myList, 7);
+
+    dlist_popBack(&myList);
+    dlist_popFront(&myList);
+
+    // Isi List => [8, 9, 10, 1, 2, 3]
+
+    dlist_insertAt(&myList, 1, 13);
+    
+    // Isi List => [8, 13, 9, 10, 1, 2, 3]
+    // printlist
+    while (!dlist_isEmpty(&myList)) {
+        printf("%d ", dlist_front(&myList));
+        dlist_popFront(&myList);
+    }
+    puts("");
+    return 0;
 }

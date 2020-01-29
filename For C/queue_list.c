@@ -1,20 +1,27 @@
-/*
--- Created by Bayu Laksana on 20 December 2019
--- Implemented for C (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT Queue (Queue menggunakan Linked List)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
-/* Node structure */
+/* Struktur Node */
 
 typedef struct queueNode_t {
     int data;
     struct queueNode_t *next;
 } QueueNode;
 
-/* Actual structure */
+/* Struktur ADT Queue */
 
 typedef struct queue_t {
     QueueNode   *_front, 
@@ -84,4 +91,26 @@ int queue_front(Queue *queue)
 
 int queue_size(Queue *queue) {
     return queue->_size;
+}
+
+int main(int argc, char const *argv[])
+{
+    // Buat objek QueueArray
+    Queue myQueue;
+
+    // PENTING! Jangan lupa diinisialisasi
+    queue_init(&myQueue);
+
+    // Operasi pada queue
+    queue_push(&myQueue, 1);
+    queue_push(&myQueue, 2);
+    queue_push(&myQueue, 3);
+
+    // cetak isi queue
+    while (!queue_isEmpty(&myQueue)) {
+        printf("%d ", queue_front(&myQueue));
+        queue_pop(&myQueue);
+    }
+    puts("");
+    return 0;
 }

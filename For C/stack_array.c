@@ -1,13 +1,20 @@
-/*
--- Created by Bayu Laksana on 20 December 2019
--- Implemented for C (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT StackArray (Stack menggunakan static Array)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
-/* Actual structure */
+/* Struktur ADT StackArray */
 
 typedef struct stackarr_t {
     int *_element, _topIndex;
@@ -57,5 +64,27 @@ int stackArray_top(StackArray *stack)
     if (!stackArray_isEmpty(stack)) {
         return stack->_element[stack->_topIndex];
     }
+    return 0;
+}
+
+int main(int argc, char const *argv[])
+{
+    // Buat objek StackArray
+    StackArray myStack;
+
+    // PENTING! Jangan lupa diinisialisasi
+    stackArray_init(&myStack, 10);
+
+    // Operasi pada stack
+    stackArray_push(&myStack, 1);
+    stackArray_push(&myStack, 2);
+    stackArray_push(&myStack, 3);
+
+    // cetak isi stack
+    while (!stackArray_isEmpty(&myStack)) {
+        printf("%d ", stackArray_top(&myStack));
+        stackArray_pop(&myStack);
+    }
+    puts("");
     return 0;
 }

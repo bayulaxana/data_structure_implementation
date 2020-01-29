@@ -1,20 +1,27 @@
-/*
--- Created by Bayu Laksana on 20 December 2019
--- Implemented for C (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT SInglyList (Singly Linked List)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
-/* Node structure */
+/* Struktur Node */
 
 typedef struct snode_t {
     int data;
     struct snode_t *next;
 } SListNode;
 
-/* Actual list structure */
+/* Struktur ADT SinglyList */
 
 typedef struct slist_t {
     unsigned _size;
@@ -162,5 +169,41 @@ int slist_getAt(SinglyList *list, int index)
         }
         return temp->data;
     }
+    return 0;
+}
+
+int main(int argc, char const *argv[])
+{
+    // Buat objek SinglyList
+    SinglyList myList;
+
+    // PENTING! Jangan lupa diinisialisasi
+    slist_init(&myList);
+
+    // Gunakan operasi linked list
+    slist_pushBack(&myList, 1);
+    slist_pushBack(&myList, 2);
+    slist_pushBack(&myList, 3);
+    slist_pushBack(&myList, 4);
+
+    slist_pushFront(&myList, 10);
+    slist_pushFront(&myList, 9);
+    slist_pushFront(&myList, 8);
+    slist_pushFront(&myList, 7);
+
+    slist_popBack(&myList);
+    slist_popFront(&myList);
+
+    // Isi List => [8, 9, 10, 1, 2, 3]
+
+    slist_insertAt(&myList, 1, 13);
+    
+    // Isi List => [8, 13, 9, 10, 1, 2, 3]
+    // printlist
+    while (!slist_isEmpty(&myList)) {
+        printf("%d ", slist_front(&myList));
+        slist_popFront(&myList);
+    }
+    puts("");
     return 0;
 }

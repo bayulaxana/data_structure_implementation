@@ -1,20 +1,27 @@
-/*
--- Created by Bayu Laksana on 20 December 2019
--- Implemented for C (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT Stack (Stack menggunakan Linked List)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
-/* Node structure */
+/* Struktur Node */
 
 typedef struct stackNode_t {
     int data;
     struct stackNode_t *next;
 } StackNode;
 
-/* Actual structure */
+/* Struktur ADT Stack */
 
 typedef struct stack_t {
     StackNode *_top;
@@ -74,4 +81,26 @@ int stack_top(Stack *stack)
 
 unsigned stack_size(Stack *stack) {
     return stack->_size;
+}
+
+int main(int argc, char const *argv[])
+{
+    // Buat objek Stack
+    Stack myStack;
+
+    // PENTING! Jangan lupa diinisialisasi
+    stack_init(&myStack);
+
+    // Operasi pada stack
+    stack_push(&myStack, 1);
+    stack_push(&myStack, 2);
+    stack_push(&myStack, 3);
+
+    // cetak isi stack
+    while (!stack_isEmpty(&myStack)) {
+        printf("%d ", stack_top(&myStack));
+        stack_pop(&myStack);
+    }
+    puts("");
+    return 0;
 }

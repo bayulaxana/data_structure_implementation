@@ -1,13 +1,20 @@
-/*
--- Created by Bayu Laksana on 20 December 2019
--- Implemented for C (Data Structure 2020)
-----------------------------------------------
-*/
+/**
+ * Implementasi ADT QueueArray (Queue menggunakan array)
+ * 
+ * Dibuat dan ditulis oleh Bayu Laksana
+ * -- tanggal 22 Januari 2019
+ * Struktur Data 2020
+ * Implementasi untuk bahasa C
+ * 
+ * !!NOTE!!
+ * cara menggunakan lihat pada fungsi main()
+ */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 
-/* Actual structure */
+/* Struktur ADT QueueArray */
 
 typedef struct queuearr_t {
     int *_element;
@@ -72,4 +79,26 @@ int queueArray_front(QueueArray *queue)
 
 unsigned queueArray_size(QueueArray *queue) {
     return (queue->_size);
+}
+
+int main(int argc, char const *argv[])
+{
+    // Buat objek QueueArray
+    QueueArray myQueue;
+
+    // PENTING! Jangan lupa diinisialisasi
+    queueArray_init(&myQueue, 10);
+
+    // Operasi pada queue
+    queueArray_push(&myQueue, 1);
+    queueArray_push(&myQueue, 2);
+    queueArray_push(&myQueue, 3);
+
+    // cetak isi queue
+    while (!queueArray_isEmpty(&myQueue)) {
+        printf("%d ", queueArray_front(&myQueue));
+        queueArray_pop(&myQueue);
+    }
+    puts("");
+    return 0;
 }
