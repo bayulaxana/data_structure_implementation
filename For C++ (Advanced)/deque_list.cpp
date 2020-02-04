@@ -1,5 +1,5 @@
 /**
- * Implementasi ADT List (Doubly Linked List)
+ * Implementasi ADT Deque (Double-ended Queue)
  * 
  * Dibuat dan ditulis oleh Bayu Laksana
  * -- tanggal 22 Januari 2019
@@ -8,15 +8,12 @@
  * 
  */
 
-#include <stdlib.h>
 #include <iostream>
 
 using namespace std;
 
-/* Structure of Doubly Linked List */
-
-template <typename T=int>
-class List
+template <typename T = int>
+class Deque
 {
 private:
     // Node Structure
@@ -41,7 +38,7 @@ private:
     }
 
 public:
-    List() {
+    Deque() {
         _head = _tail = NULL;
         _size = 0;
     }
@@ -81,45 +78,6 @@ public:
             _tail->next = newNode;
             newNode->prev = _tail;
             _tail = newNode;
-        }
-    }
-
-    void insertAt(T value, unsigned index)
-    {
-        if (index == 0) {
-            pushFront(value);
-            return;
-        }
-        else if (index >= _size) {
-            pushBack(value);
-            return;
-        }
-
-        DListNode *newNode = __createNode(value);
-        if (newNode) {
-            if (isEmpty()) {
-                _head = newNode;
-                _tail = newNode;
-                _size++;
-                return;
-            }
-
-            DListNode *temp = _head;
-            unsigned _i = 0;
-
-            while ((_i < index - 1) && \
-                    temp->next != NULL)
-            {
-                temp = temp->next;
-                _i++;
-            }
-            newNode->next = temp->next;
-            newNode->prev = temp;
-
-            if (temp->next)
-                temp->next->prev = newNode;
-            temp->next = newNode;
-            _size++;
         }
     }
 
@@ -173,10 +131,6 @@ public:
             }
             _size--;
         }
-    }
-
-    unsigned size() {
-        return _size;
     }
 };
 

@@ -6,8 +6,6 @@
  * Struktur Data 2020
  * Implementasi untuk bahasa C++
  * 
- * !!NOTE!!
- * cara menggunakan lihat pada fungsi main()
  */
 
 #include <stdlib.h>
@@ -18,7 +16,7 @@ using namespace std;
 /* Structure of Queue using List */
 
 template <typename T=int>
-struct Queue
+class Queue
 {
     // Node Structure
     struct QueueNode {
@@ -83,19 +81,6 @@ struct Queue
 
 int main(int argc, char const *argv[])
 {
-    char str[23];
-    Queue<int> myq;
     
-    int n = 3;
-    while (n--) {
-        int xx;
-        scanf("%d", &xx);
-        myq.push(xx);
-    }
-
-    while (!myq.isEmpty()) {
-        printf("%d\n", myq.front());
-        myq.pop();
-    }
     return 0;
 }

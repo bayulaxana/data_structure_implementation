@@ -7,15 +7,13 @@
  * Struktur Data 2020
  * Implementasi untuk bahasa C++
  * 
- * !!NOTE!!
- * cara menggunakan lihat pada fungsi main()
  */
 
 #include <stdlib.h>
 #include <iostream>
 
 template <typename T=int>
-struct PriorityQueue
+class PriorityQueue
 {
 private:
     struct PQueueNode {
@@ -93,14 +91,6 @@ using std::endl;
  */
 int main(int argc, char const *argv[])
 {
-    PriorityQueue<> pq; //default holds int data type
-    pq.push(12);
-    pq.push(13);
-    pq.push(1);
-
-    while (!pq.isEmpty()) {
-        cout << pq.top() << endl;
-        pq.pop();
-    }
+    
     return 0;
 }

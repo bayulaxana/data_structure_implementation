@@ -6,8 +6,6 @@
  * Struktur Data 2020
  * Implementasi untuk bahasa C++
  * 
- * !!NOTE!!
- * cara menggunakan lihat pada fungsi main()
  */
 
 
@@ -19,7 +17,7 @@ using namespace std;
 /* Structure of Stack using Array */
 
 template <int stackSize, typename T=int>
-struct StackArray
+class StackArray
 {
 private:
     T *_element;
@@ -65,11 +63,6 @@ public:
 
 int main()
 {
-    StackArray<100, double> mystc;
-    mystc.push(2.32);
-    mystc.push(3.30);
-    mystc.push(9.1);
-    mystc.pop();
-    cout << mystc.top() << endl;
+    
     return 0;
 }

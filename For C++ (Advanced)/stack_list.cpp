@@ -5,9 +5,7 @@
  * -- tanggal 22 Januari 2019
  * Struktur Data 2020
  * Implementasi untuk bahasa C++
- * 
- * !!NOTE!!
- * cara menggunakan lihat pada fungsi main()
+ *
  */
 
 #include <stdlib.h>
@@ -18,7 +16,7 @@ using namespace std;
 /* Structure of Stack using List */
 
 template <typename T=int>
-struct Stack
+class Stack
 {
 private:
     // Node structure
@@ -72,11 +70,6 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    Stack<double> mystc;
-    mystc.push(2.3);
-    mystc.push(3.34);
-    mystc.push(9.1);
-    mystc.pop();
-    cout << mystc.top() << endl;
+    
     return 0;
 }

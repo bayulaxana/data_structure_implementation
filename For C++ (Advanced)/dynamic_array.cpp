@@ -6,8 +6,6 @@
  * Struktur Data 2020
  * Implementasi untuk bahasa C++
  * 
- * !!NOTE!!
- * cara menggunakan lihat pada fungsi main()
  */
 
 #include <stdlib.h>
@@ -16,7 +14,7 @@
 using namespace std;
 
 template <typename T=int>
-struct DynamicArray
+class DynamicArray
 {
 private:
     T *_arr;
@@ -92,13 +90,6 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    DynamicArray<double> mydna;
-    for (int i=0; i<=10; ++i) mydna.pushBack(double(i) * 2.3);
-
-    while (!mydna.isEmpty()) {
-        cout << mydna.back() << ' ';
-        mydna.popBack();
-    }
-    puts("");
-    return 0;
+    
+    return 0;   
 }

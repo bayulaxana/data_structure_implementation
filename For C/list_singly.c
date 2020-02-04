@@ -28,7 +28,7 @@ typedef struct slist_t {
     SListNode *_head;
 } SinglyList;
 
-/* Function prototype */
+/* DAFTAR FUNGSI YANG TERSEDIA */
 
 void slist_init(SinglyList *list);
 bool slist_isEmpty(SinglyList *list);
@@ -37,7 +37,8 @@ void slist_popFront(SinglyList *list);
 void slist_pushBack(SinglyList *list, int value);
 void slist_popBack(SinglyList *list);
 void slist_insertAt(SinglyList *list, int index, int value);
-// void slist_removeAt(SinglyList *list, int index);
+void slist_removeAt(SinglyList *list, int index);
+void slist_remove(SinglyList *list, int value);
 int  slist_front(SinglyList *list);
 int  slist_back(SinglyList *list);
 int  slist_getAt(SinglyList *list, int index);
@@ -114,11 +115,12 @@ void slist_popBack(SinglyList *list)
 
 void slist_insertAt(SinglyList *list, int index, int value)
 {
+    /* Kasus apabila posisinya melebihi batas */
     if (slist_isEmpty(list) || index >= list->_size) {
         slist_pushBack(list, value);
         return;    
     }
-    else if (index == 0) {
+    else if (index == 0 || index < 0) {
         slist_pushFront(list, value);
         return;
     }
@@ -127,7 +129,6 @@ void slist_insertAt(SinglyList *list, int index, int value)
     if (newNode) {
         SListNode *temp = list->_head;
         int _i = 0;
-        
         while (temp->next != NULL && _i < index-1) {
             temp = temp->next;
             _i++;
@@ -136,6 +137,55 @@ void slist_insertAt(SinglyList *list, int index, int value)
         newNode->next = temp->next;
         temp->next = newNode;
         list->_size++;
+    }
+}
+
+void slist_removeAt(SinglyList *list, int index)
+{
+    if (!slist_isEmpty(list)) {
+        
+        /* Kasus apabila posisinya melebihi batas */
+        if (index >= list->_size) {
+            slist_popBack(list);
+            return;    
+        }
+        else if (index == 0 || index < 0) {
+            slist_popFront(list);
+            return;
+        }
+        
+        SListNode *temp = list->_head;
+        int _i = 0;
+        while (temp->next != NULL && _i < index-1) {
+            temp = temp->next;
+            _i++;
+        }
+        SListNode *nextTo = temp->next->next;
+        free(temp->next);
+        temp->next = nextTo;
+        list->_size--;
+    }
+}
+
+void slist_remove(SinglyList *list, int value)
+{
+    if (!slist_isEmpty(list)) {
+        SListNode *temp, *prev;
+        temp = list->_head;
+
+        if (temp->data == value) {
+            slist_popFront(list);
+            return;
+        }
+        while (temp != NULL && temp->data != value) {
+            prev = temp;
+            temp = temp->next;
+        }
+
+        if (temp == NULL) return;
+        prev->next = temp->next;
+        free(temp);
+        list->_size--;
     }
 }
 
@@ -196,9 +246,13 @@ int main(int argc, char const *argv[])
 
     // Isi List => [8, 9, 10, 1, 2, 3]
 
+    slist_removeAt(&myList, 3);
+
     slist_insertAt(&myList, 1, 13);
+    slist_pushBack(&myList, 1);
+    slist_remove(&myList, 1);
     
-    // Isi List => [8, 13, 9, 10, 1, 2, 3]
+    // Isi List => [8, 13, 9, 10, 2, 3]
     // printlist
     while (!slist_isEmpty(&myList)) {
         printf("%d ", slist_front(&myList));

@@ -6,8 +6,6 @@
  * Struktur Data 2020
  * Implementasi untuk bahasa C++
  * 
- * !!NOTE!!
- * cara menggunakan lihat pada fungsi main()
  */
 
 #include <stdlib.h>
@@ -18,7 +16,7 @@ using namespace std;
 /* Structure of Singly Linked List */
 
 template <typename T=int>
-struct SinglyList
+class SinglyList
 {
 private:
     // Node structure
@@ -123,6 +121,55 @@ public:
         }
     }
 
+    void removeAt(int index)
+    {
+        if (!isEmpty()) {
+            
+            /* Kasus apabila posisinya melebihi batas */
+            if (index >= _size) {
+                popBack();
+                return;    
+            }
+            else if (index == 0 || index < 0) {
+                popFront();
+                return;
+            }
+
+            SListNode *temp = _head;
+            int _i = 0;
+            while (temp->next != NULL && _i < index-1) {
+                temp = temp->next;
+                _i++;
+            }
+            SListNode *nextTo = temp->next->next;
+            free(temp->next);
+            temp->next = nextTo;
+            _size--;
+        }
+    }
+
+    void remove(T value)
+    {
+        if (!isEmpty()) {
+            SListNode *temp, *prev;
+            temp = _head;
+
+            if (temp->data == value) {
+                popFront();
+                return;
+            }
+            while (temp != NULL && temp->data != value) {
+                prev = temp;
+                temp = temp->next;
+            }
+
+            if (temp == NULL) return;
+            prev->next = temp->next;
+            free(temp);
+            _size--;
+        }
+    }
+
     T front() {
         if (!isEmpty()) return _head->data;
         else exit(-1);
@@ -155,40 +202,6 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    SinglyList<long long> myList;
     
-    myList.pushBack(5);
-    myList.pushBack(6);
-    myList.pushBack(7);
-    myList.pushFront(11);
-    myList.pushFront(10);
-    myList.pushFront(14);
-
-    myList.popBack();
-
-    while (!myList.isEmpty()) {
-        cout << myList.front() << endl;
-        myList.popFront();
-    }
-
-    SinglyList<char> myList2;
-    myList2.pushBack('A');
-    myList2.pushBack('V');
-    myList2.pushBack('L');
-    myList2.pushBack('X');
-    myList2.pushFront(' ');
-    myList2.pushFront('E');
-    myList2.pushFront('E');
-    myList2.pushFront('R');
-    myList2.pushFront('T');
-    myList2.pushFront('T');
-
-    myList2.popBack(); myList2.popFront();
-
-    while (!myList2.isEmpty()) {
-        cout << myList2.front();
-        myList2.popFront();
-    }
-    puts("");
     return 0;
 }

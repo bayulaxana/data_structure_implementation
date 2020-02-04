@@ -6,8 +6,6 @@
  * Struktur Data 2020
  * Implementasi untuk bahasa C++
  * 
- * !!NOTE!!
- * cara menggunakan lihat pada fungsi main()
  */
 
 #include <stdlib.h>
@@ -18,7 +16,7 @@ using namespace std;
 /* Structure of Queue using Array */
 
 template <int queueSize, typename T=int>
-struct QueueArray
+class QueueArray
 {
 private:
     T *_element;
@@ -74,16 +72,6 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    QueueArray<100, char> myq;
-    myq.push('X');
-    myq.push('A');
-    myq.push('K');
-    myq.push('U');
-    myq.pop();
-
-    while (!myq.isEmpty()) {
-        cout << myq.front() << endl;
-        myq.pop();
-    }
+    
     return 0;
 }

@@ -31,8 +31,7 @@ typedef struct dlist_t {
     unsigned _size;
 } List;
 
-/* Function prototype */
-/* Function prefix: dlist_ */
+/* DAFTAR FUNGSI YANG TERSEDIA */
 
 DListNode* __dlist_createNode(int value);
 void dlist_init(List *list);
@@ -113,6 +112,10 @@ void dlist_insertAt(List *list, unsigned index, int value)
         dlist_pushFront(list, value);
         return;
     }
+    else if (index >= list->_size) {
+        dlist_pushBack(list, value);
+        return;
+    }
 
     DListNode *newNode = __dlist_createNode(value);
     if (newNode) {
@@ -123,11 +126,9 @@ void dlist_insertAt(List *list, unsigned index, int value)
         }
 
         DListNode *temp = list->_head;
-        unsigned _i = 0;
 
-        while ((_i < index - 1) && \
-                temp->next != NULL)
-        {
+        unsigned _i = 0;
+        while (_i < index - 1 && temp->next != NULL) {
             temp = temp->next;
             _i++;
         }
@@ -218,10 +219,10 @@ int main(int argc, char const *argv[])
     dlist_popFront(&myList);
 
     // Isi List => [8, 9, 10, 1, 2, 3]
-
+    dlist_insertAt(&myList, 6, 100);
     dlist_insertAt(&myList, 1, 13);
     
-    // Isi List => [8, 13, 9, 10, 1, 2, 3]
+    // Isi List => [8, 13, 9, 10, 1, 2, 3, 100]
     // printlist
     while (!dlist_isEmpty(&myList)) {
         printf("%d ", dlist_front(&myList));
