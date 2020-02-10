@@ -103,6 +103,12 @@ void slist_popBack(SinglyList *list)
         SListNode *nextNode = list->_head->next;
         SListNode *currNode = list->_head;
 
+        if (currNode->next == NULL) {
+            free(currNode);
+            list->_head = NULL;
+            return;
+        }
+
         while (nextNode->next != NULL) {
             currNode = nextNode;
             nextNode = nextNode->next;
@@ -253,11 +259,20 @@ int main(int argc, char const *argv[])
     slist_remove(&myList, 1);
     
     // Isi List => [8, 13, 9, 10, 2, 3]
-    // printlist
-    while (!slist_isEmpty(&myList)) {
-        printf("%d ", slist_front(&myList));
-        slist_popFront(&myList);
+    // printlist reversed
+    while (myList._head != NULL) {
+        printf("%d ", slist_back(&myList));
+        slist_popBack(&myList);
     }
     puts("");
+    
+    slist_pushFront(&myList, 110);
+    printf("%d\n", slist_front(&myList));
+    printf("%d\n", slist_back(&myList));
+
+    slist_remove(&myList, 110);
+    printf("%d\n", slist_back(&myList));
+    printf("%d\n", slist_front(&myList));
+
     return 0;
 }

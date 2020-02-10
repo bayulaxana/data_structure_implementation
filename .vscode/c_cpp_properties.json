@@ -17,7 +17,7 @@
             "intelliSenseMode": "msvc-x64"
         },
         {
-            "name": "Mingw",
+            "name": "MingW",
             "includePath": [
                 "${workspaceFolder}/**"
             ],
