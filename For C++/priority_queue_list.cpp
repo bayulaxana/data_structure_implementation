@@ -10,20 +10,20 @@
  */
 
 #include <stdlib.h>
-#include <iostream>
+#include <stdio.h>
 
-template <typename T=int>
-class PriorityQueue
+struct PQueueNode {
+    int data;
+    PQueueNode *next;
+};
+
+// Default priority: minimum
+struct PriorityQueue
 {
-private:
-    struct PQueueNode {
-        T data;
-        PQueueNode *next;
-    } *_top;
+    PQueueNode *_top;
     unsigned _size;
 
-public:
-    PriorityQueue()
+    void init()
     {
         _top = NULL;
         _size = 0;
@@ -33,7 +33,7 @@ public:
         return (_top == NULL);
     }
 
-    void push(T value)
+    void push(int value)
     {
         PQueueNode *temp = _top;
         PQueueNode *newNode = \
@@ -68,7 +68,7 @@ public:
         }
     }
 
-    T top()
+    int top()
     {
         if (!isEmpty()) return _top->data;
         else exit(-1);
@@ -78,9 +78,6 @@ public:
         return _size;
     }
 };
-
-using std::cout;
-using std::endl;
 
 int main(int argc, char const *argv[])
 {

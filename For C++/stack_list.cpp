@@ -9,25 +9,23 @@
  */
 
 #include <stdlib.h>
-#include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
-/* Structure of Stack using List */
+// Node structure
+struct StackNode {
+    int data;
+    StackNode *next;
+};
 
-template <typename T=int>
-class Stack
+/* Structure of Stack using List */
+struct Stack
 {
-private:
-    // Node structure
-    struct StackNode {
-        T data;
-        StackNode *next;
-    } *_top;
+    StackNode *_top;
     unsigned _size;
 
-public:
-    Stack() 
+    void init() 
     {
         _size = 0;
         _top = nullptr;
@@ -37,7 +35,7 @@ public:
         return (_top == nullptr);
     }
 
-    void push(T value)
+    void push(int value)
     {
         StackNode *newNode = (StackNode*) malloc(sizeof(StackNode));
         if (newNode) {
@@ -60,7 +58,7 @@ public:
         }
     }
 
-    T top()
+    int top()
     {
         if (!isEmpty())
             return _top->data;
@@ -70,6 +68,21 @@ public:
 
 int main(int argc, char const *argv[])
 {
-    
+    // Buat objek stack
+    Stack myStack;
+    // PENTING!! Jangan lupa di-init
+    myStack.init();
+
+    myStack.push(6);
+    myStack.push(7);
+    myStack.push(1);
+    myStack.push(2);
+
+    // Cetak isi stack
+    while (!myStack.isEmpty()) {
+        printf("%d", myStack.top());
+        myStack.pop();
+    }
+    puts("");
     return 0;
 }

@@ -40,10 +40,10 @@ struct SinglyList
         SListNode *newNode = (SListNode*) malloc(sizeof(SListNode));
         if (newNode) {
             _size++;
+            newNode->data = value;
+            
             if (isEmpty()) newNode->next = NULL;
             else newNode->next = _head;
-
-            newNode->data = value;
             _head = newNode;
         }
     }
