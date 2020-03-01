@@ -167,10 +167,6 @@ void bst_remove(uniqueBST *bst, int value) {
     }
 }
 
-void bst_clean(uniqueBST *bst) {
-
-}
-
 /**
  * Binary search tree traversal
  * - Inorder
