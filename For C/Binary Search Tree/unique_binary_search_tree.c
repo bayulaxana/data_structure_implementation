@@ -1,5 +1,5 @@
 /**
- * Implementasi Binary Search Tree (ADT: uniqueBST)
+ * Implementasi Binary Search Tree (ADT: BST)
  * yakni BST yang tidak menyimpan key duplikat (unique key)
  * 
  * Dibuat dan ditulis oleh Bayu Laksana
@@ -27,7 +27,7 @@ typedef struct bstnode_t {
 typedef struct bst_t {
     BSTNode *_root;
     unsigned int _size;
-} uniqueBST;
+} BST;
 
 /**
  * !!! WARNING UTILITY FUNCTION !!!
@@ -133,16 +133,16 @@ void __bst__preorder(BSTNode *root) {
  * Accessible and safe to use.
  */
 
-void bst_init(uniqueBST *bst) {
+void bst_init(BST *bst) {
     bst->_root = NULL;
     bst->_size = 0u;
 }
 
-bool bst_isEmpty(uniqueBST *bst) {
+bool bst_isEmpty(BST *bst) {
     return bst->_root == NULL;
 }
 
-bool bst_find(uniqueBST *bst, int value) {
+bool bst_find(BST *bst, int value) {
     BSTNode *temp = __bst__search(bst->_root, value);
     if (temp == NULL)
         return false;
@@ -153,14 +153,14 @@ bool bst_find(uniqueBST *bst, int value) {
         return false;
 }
 
-void bst_insert(uniqueBST *bst, int value) {
+void bst_insert(BST *bst, int value) {
     if (!bst_find(bst, value)) {
         bst->_root = __bst__insert(bst->_root, value);
         bst->_size++;
     }
 }
 
-void bst_remove(uniqueBST *bst, int value) {
+void bst_remove(BST *bst, int value) {
     if (bst_find(bst, value)) {
         bst->_root = __bst__remove(bst->_root, value);
         bst->_size--;
@@ -174,21 +174,21 @@ void bst_remove(uniqueBST *bst, int value) {
  * - Preorder
  */
 
-void bst_inorder(uniqueBST *bst) {
+void bst_inorder(BST *bst) {
     __bst__inorder(bst->_root);
 }
 
-void bst_postorder(uniqueBST *bst) {
+void bst_postorder(BST *bst) {
     __bst__postorder(bst->_root);
 }
 
-void bst_preorder(uniqueBST *bst) {
+void bst_preorder(BST *bst) {
     __bst__preorder(bst->_root);
 }
  
 int main()
 {
-    uniqueBST set;
+    BST set;
     bst_init(&set);
 
     bst_insert(&set, 6);
