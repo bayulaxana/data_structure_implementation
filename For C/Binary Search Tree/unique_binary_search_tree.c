@@ -199,12 +199,12 @@ int main()
     bst_insert(&set, 3);
     bst_insert(&set, 7);
 
-    bst_inorder(set._root);
+    bst_inorder(&set);
     puts("");
 
     bst_remove(&set, 8);
     bst_remove(&set, 6);
-    bst_inorder(set._root);
+    bst_inorder(&set);
     puts("");
     
     return 0;
