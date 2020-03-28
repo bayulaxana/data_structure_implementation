@@ -1,12 +1,25 @@
+/** 
+ * [MADE WITH ❤ by BAYU LAKSANA]
+ * 
+ * Here is a comprehensive and elegant implementation of
+ * Map Abstract Data Type (ADT) using AVL Tree Data Structures
+ * 
+ * Read the Documentation on README
+ * https://github.com/AlproITS/StrukturData/....
+ */  
+
 #include <iostream>
 #include <algorithm>
 #include <stack>
-#include <map>
 
 /**
  * "NodeData" is used to store
  * the key-value pair, the basic behaviour
- * of Map ADT
+ * of Map ADT.
+ * 
+ * [ Default data type ]
+ * - key    : int
+ * - value  : int
  */
 struct NodeData {
     int key, value;
@@ -36,7 +49,8 @@ struct Node {
  * - key    : int
  * - value  : int
  */
-class Map {
+class Map
+{
     Node *_root;
     unsigned _size;
 
@@ -137,9 +151,13 @@ class Map {
     }
 
 public:
-    class iterator;
     Map(): _size(0U), _root(nullptr)
     {}
+
+    ~Map() {
+        clear();
+        delete _root;
+    }
     
     bool isEmpty() {
         return _root == nullptr;
@@ -182,78 +200,15 @@ public:
             return _search(_root, key)->data.value;
         else exit(-1);
     }
-
-    iterator begin() { return iterator(_root); }
-    iterator end() { return iterator(); }
-
-    class iterator {
-        std::stack< Node* > stk;
-        Node *currNode;
-
-        bool hasNext() {
-            return !stk.empty();
-        }
-
-        Node* next() {
-            Node *tmp = stk.top();
-            stk.pop();
-
-            if (tmp && tmp->right)
-                traverseLeft(tmp->right);
-            return tmp;
-        }
-
-        void traverseLeft(Node *node) {
-            while (node) {
-                stk.push(node);
-                node = node->left;
-            }
-        }
-    
-    public:
-        iterator(): currNode(nullptr) {}
-        iterator(Node *node) {
-            stk.push(nullptr);
-            traverseLeft(node);
-
-            if (this->hasNext())
-                currNode = this->next();
-        }
-
-        NodeData& operator*() { return currNode->data; }
-        const NodeData& get() { return currNode->data; }
-
-        iterator& operator=(Node *rNode) {
-            this->currNode = rNode;
-            return *this;
-        }
-
-        iterator& operator++() {
-            if (this->hasNext())
-                currNode = this->next();
-            return *this;
-        }
-
-        iterator operator++(int) {
-            iterator it = *this;
-            ++*this;
-            return it;
-        }
-
-        bool operator!=(const iterator &other) {
-            return currNode != other.currNode;
-        }
-    };
 };
 
 int main(int argc, char const *argv[])
 {
     Map mp;
-    std::map<int, int> myMap;
 
     // Map::assign( {key, value} );
     // insert key-value pairs if doesn't exist yet, or
-    // change the value of already-inserted key-value pairs
+    // change the value of already-inserted key
     mp.assign({11, 23});
     mp.assign({1, 16});
     mp.assign({9, 12});
@@ -263,20 +218,5 @@ int main(int argc, char const *argv[])
     // get the value of already-inserted key-value pairs
     int foo = mp.getValue(1);
     std::cout << foo << '\n';
-
-    // Map is iterable by its key in ascending order
-    // One way of traversing a Map
-    Map::iterator it = mp.begin();
-    while (it != mp.end()) {
-        std::cout << it.get().key << ' ' << it.get().value << '\n';
-        it++;
-    }
-
-    mp.clear();
-    // Another way (using C++11 range-based for loops)
-    for (NodeData &x : mp) {
-        std::cout << x.key << ' ' << x.value << '\n';
-    }
-    puts("done");
     return 0;
 }
