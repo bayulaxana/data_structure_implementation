@@ -1,13 +1,10 @@
-/**
- * Implementasi AVL Tree (ADT: AVL)
- * yakni Self-Balancing BST yang tidak menyimpan key duplikat (unique key)
- * 
- * Dibuat dan ditulis oleh Abdur Rochman
- * -- tanggal 28 Maret 2019
- * Struktur Data 2020
- * 
- * Implementasi untuk Bahasa C
- */
+// ========[AVL Tree]======== //
+/*
+    Dibuat dan ditulis oleh ABDUR ROCHMAN
+    28-03-2020
+    Struktur Data 2020
+    For C
+*/
 
 #include <stdlib.h>
 #include <stdbool.h>
@@ -201,15 +198,15 @@ bool avl_isEmpty(AVL *avl) {
 }
 
 bool avl_find(AVL *avl, int value) {
-        AVLNode *temp = _search(avl->_root, value);
-        if (temp == NULL)
-            return false;
-        
-        if (temp->data == value)
-            return true;
-        else
-            return false;
-    }
+    AVLNode *temp = _search(avl->_root, value);
+    if (temp == NULL)
+        return false;
+    
+    if (temp->data == value)
+        return true;
+    else
+        return false;
+}
 
 void avl_insert(AVL *avl,int value){
     if(!avl_find(avl,value)){
