@@ -53,7 +53,7 @@ int _max(int a,int b){
     return (a > b)? a : b;
 }
 
-AVLNode* _rightRotate(AVLNode* pivotNode){
+AVLNode* _rightRotate(AVLNode* pivotNode) {
 
     AVLNode* newParrent=pivotNode->left;
     pivotNode->left=newParrent->right;
@@ -105,9 +105,9 @@ int _getBalanceFactor(AVLNode* node){
     return _getHeight(node->left)-_getHeight(node->right);
 }
 
-AVLNode* _insert_AVL(AVL *avl,AVLNode* node,int value){
+AVLNode* _insert_AVL(AVL *avl,AVLNode* node,int value) {
     
-    if(node==NULL)
+    if(node==NULL) // udah mencapai leaf
         return _avl_createNode(value);
     if(value < node->data)
         node->left = _insert_AVL(avl,node->left,value);
@@ -118,9 +118,9 @@ AVLNode* _insert_AVL(AVL *avl,AVLNode* node,int value){
 
     int balanceFactor=_getBalanceFactor(node);
     
-    if(balanceFactor > 1 && value < node->left->data)
+    if(balanceFactor > 1 && value < node->left->data) // skewed kiri (left-left case)
         return _leftCaseRotate(node);
-    if(balanceFactor > 1 && value > node->left->data)
+    if(balanceFactor > 1 && value > node->left->data) // 
 		return _leftRightCaseRotate(node);
     if(balanceFactor < -1 && value > node->right->data)
         return _rightCaseRotate(node);
@@ -179,10 +179,10 @@ AVLNode* _remove_AVL(AVLNode* node,int value){
     if(balanceFactor>1 && _getBalanceFactor(node->left)<0) 
         return _leftRightCaseRotate(node);
   
-    if(balanceFactor<-1 && _getBalanceFactor(node->right)<=0) 
+    if(balanceFactor < -1 && _getBalanceFactor(node->right)<=0) 
         return _rightCaseRotate(node);
 
-    if(balanceFactor<-1 && _getBalanceFactor(node->right)>0) 
+    if(balanceFactor < -1 && _getBalanceFactor(node->right)>0) 
         return _rightLeftCaseRotate(node);
     
     return node;

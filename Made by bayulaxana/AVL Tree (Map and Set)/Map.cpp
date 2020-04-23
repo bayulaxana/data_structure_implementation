@@ -195,6 +195,13 @@ public:
         }
     }
 
+    void remove(int key) {
+        if (exist(key)) {
+            // _root = 
+            _size--;
+        }
+    }
+
     int getValue(int key) {
         if (exist(key))
             return _search(_root, key)->data.value;
