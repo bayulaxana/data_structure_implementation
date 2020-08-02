@@ -8,23 +8,24 @@
  * 
  */
 
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
 
-template <typename T = int>
-class Deque
+// Node Structure
+struct DListNode {
+    int data;
+    DListNode *next, *prev;
+};
+
+struct Deque
 {
-private:
-    // Node Structure
-    struct DListNode {
-        T data;
-        DListNode *next, *prev;
-    } *_head, *_tail;
+    DListNode *_head, *_tail;
     unsigned _size;
 
     // Utility function
-    DListNode* __createNode(T value)
+    DListNode* __createNode(int value)
     {
         DListNode *newNode = \
             (DListNode*) malloc (sizeof(DListNode));
@@ -37,8 +38,7 @@ private:
         return (DListNode*) newNode;
     }
 
-public:
-    Deque() {
+    void init() {
         _head = _tail = NULL;
         _size = 0;
     }
@@ -47,7 +47,7 @@ public:
         return (_head == NULL && _tail == NULL);
     }
 
-    void pushFront(T value)
+    void pushFront(int value)
     {
         DListNode *newNode = __createNode(value);
         if (newNode) {
@@ -64,7 +64,7 @@ public:
         }
     }
 
-    void pushBack(T value)
+    void pushBack(int value)
     {
         DListNode *newNode = __createNode(value);
         if (newNode) {
@@ -81,14 +81,14 @@ public:
         }
     }
 
-    T front()
+    int front()
     {
         if (!isEmpty())
             return _head->data;
         exit(-1);
     }
 
-    T back()
+    int back()
     {
         if (!isEmpty())
             return _tail->data;

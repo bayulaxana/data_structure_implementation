@@ -9,25 +9,24 @@
  */
 
 #include <stdlib.h>
-#include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
-/* Structure of Singly Linked List */
-
-template <typename T=int>
-class SinglyList
+// Node structure
+struct SListNode 
 {
-private:
-    // Node structure
-    struct SListNode {
-        T data;
-        SListNode *next;
-    } *_head;
+    int data;
+    SListNode *next;
+}; 
+
+/* Structure of Singly Linked List */
+struct SinglyList
+{
+    SListNode *_head;
     unsigned _size;
 
-public:
-    SinglyList() {
+    void init() {
         _head = NULL;
         _size = 0;
     }
@@ -36,20 +35,20 @@ public:
         return (_head == NULL);
     }
 
-    void pushFront(T value)
+    void pushFront(int value)
     {
         SListNode *newNode = (SListNode*) malloc(sizeof(SListNode));
         if (newNode) {
             _size++;
+            newNode->data = value;
+            
             if (isEmpty()) newNode->next = NULL;
             else newNode->next = _head;
-
-            newNode->data = value;
             _head = newNode;
         }
     }
 
-    void pushBack(T value)
+    void pushBack(int value)
     {
         SListNode *newNode = (SListNode*) malloc(sizeof(SListNode));
         if (newNode) {
@@ -84,6 +83,12 @@ public:
             SListNode *nextNode = _head->next;
             SListNode *currNode = _head;
 
+            if (currNode->next == NULL) {
+                free(currNode);
+                _head = NULL;
+                return;
+            }
+
             while (nextNode->next != NULL) {
                 currNode = nextNode;
                 nextNode = nextNode->next;
@@ -94,7 +99,7 @@ public:
         }
     }
 
-    void insertAt(int index, T value)
+    void insertAt(int index, int value)
     {
         if (isEmpty() || index >= _size) {
             pushBack(value);
@@ -141,14 +146,14 @@ public:
                 temp = temp->next;
                 _i++;
             }
-            SListNode *nextTo = temp->next->next;
+            SListNode *nextinto = temp->next->next;
             free(temp->next);
-            temp->next = nextTo;
+            temp->next = nextinto;
             _size--;
         }
     }
 
-    void remove(T value)
+    void remove(int value)
     {
         if (!isEmpty()) {
             SListNode *temp, *prev;
@@ -170,12 +175,12 @@ public:
         }
     }
 
-    T front() {
+    int front() {
         if (!isEmpty()) return _head->data;
         else exit(-1);
     }
 
-    T back() 
+    int back() 
     {
         if (!isEmpty()) {
             SListNode *temp = _head;
@@ -186,7 +191,7 @@ public:
         else exit(-1);
     }
 
-    T getAt(int index) {
+    int getAt(int index) {
         if (!isEmpty()) {
             SListNode *temp = _head;
             int _i = 0;
@@ -202,6 +207,45 @@ public:
 
 int main(int argc, char const *argv[])
 {
+    // Buat objek SinglyList
+    SinglyList myList;
+    // PENTING! Jangan lupa di-init()
+    myList.init();
     
+    myList.pushBack(2);
+    myList.pushBack(3);
+    myList.pushBack(4);
+    myList.pushBack(5);
+    myList.pushBack(6);
+    // isi list => [2, 3, 4, 5, 6]
+
+    myList.pushFront(9);
+    myList.pushFront(8);
+    myList.pushFront(7);
+    myList.pushFront(6);
+    // isi list => [6, 7, 8, 9, 2, 3, 4, 5, 6]
+
+    // print isi list dari depan ke belakang
+    for (int i = 0; i < myList._size; i++) {
+        printf("%d ", myList.getAt(i));
+    }
+    printf("\n");
+    
+    myList.popFront();
+    myList.popBack();
+    myList.insertAt(2, 11);
+    myList.insertAt(4, 17);
+    // isi list => [7, 8, 11, 9, 17, 2, 3, 4, 5]
+
+    myList.removeAt(1);
+    myList.remove(3);
+    // isi list => [7, 11, 9, 17, 2, 4, 5]
+
+    // print list reversed
+    while (!myList.isEmpty()) {
+        printf("%d ", myList.back());
+        myList.popBack();
+    }
+    printf("\n");
     return 0;
 }

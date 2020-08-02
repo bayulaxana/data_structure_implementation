@@ -60,10 +60,10 @@ void slist_pushFront(SinglyList *list, int value)
     SListNode *newNode = (SListNode*) malloc(sizeof(SListNode));
     if (newNode) {
         list->_size++;
+        newNode->data = value;
+
         if (slist_isEmpty(list)) newNode->next = NULL;
         else newNode->next = list->_head;
-        
-        newNode->data = value;
         list->_head = newNode;
     }
 }
@@ -102,6 +102,12 @@ void slist_popBack(SinglyList *list)
     if (!slist_isEmpty(list)) {
         SListNode *nextNode = list->_head->next;
         SListNode *currNode = list->_head;
+
+        if (currNode->next == NULL) {
+            free(currNode);
+            list->_head = NULL;
+            return;
+        }
 
         while (nextNode->next != NULL) {
             currNode = nextNode;
@@ -253,10 +259,10 @@ int main(int argc, char const *argv[])
     slist_remove(&myList, 1);
     
     // Isi List => [8, 13, 9, 10, 2, 3]
-    // printlist
-    while (!slist_isEmpty(&myList)) {
-        printf("%d ", slist_front(&myList));
-        slist_popFront(&myList);
+    // printlist reversed
+    while (myList._head != NULL) {
+        printf("%d ", slist_back(&myList));
+        slist_popBack(&myList);
     }
     puts("");
     return 0;

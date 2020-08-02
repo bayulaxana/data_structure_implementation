@@ -9,23 +9,23 @@
  */
 
 #include <stdlib.h>
-#include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
-/* Structure of Queue using List */
+// Node Structure
+struct QueueNode {
+    int data;
+    QueueNode *next;
+};
 
-template <typename T=int>
-class Queue
+/* Structure of Queue using List */
+struct Queue
 {
-    // Node Structure
-    struct QueueNode {
-        T data;
-        QueueNode *next;
-    } *_front, *_rear;
+    QueueNode *_front, *_rear;
     unsigned _size;
 
-    Queue()
+    void init()
     {
         _size  = 0;
         _front = NULL;
@@ -36,7 +36,7 @@ class Queue
         return (_front == NULL && _rear == NULL);
     }
 
-    void push(T value)
+    void push(int value)
     {
         QueueNode *newNode =\
             (QueueNode*) malloc(sizeof(QueueNode));
@@ -67,7 +67,7 @@ class Queue
         }
     }
 
-    T front()
+    int front()
     {
         if (!isEmpty())
             return _front->data;
@@ -81,6 +81,21 @@ class Queue
 
 int main(int argc, char const *argv[])
 {
-    
+    // Buat objek queue
+    Queue myQueue;
+    // PENTING!! Jangan lupa di-init()
+    myQueue.init();
+
+    myQueue.push(23);
+    myQueue.push(11);
+    myQueue.push(3);
+    myQueue.push(35);
+
+    // Cetak isi queue
+    while (!myQueue.isEmpty()) {
+        printf("%d ", myQueue.front());
+        myQueue.pop();
+    }
+    puts("");
     return 0;
 }

@@ -13,21 +13,20 @@
 
 using namespace std;
 
-/* Structure of Doubly Linked List */
+// Node Structure
+struct DListNode {
+    int data;
+    DListNode *next, *prev;
+};
 
-template <typename T=int>
-class List
+/* Structure of Doubly Linked List */
+struct List
 {
-private:
-    // Node Structure
-    struct DListNode {
-        T data;
-        DListNode *next, *prev;
-    } *_head, *_tail;
+    DListNode *_head, *_tail;
     unsigned _size;
 
     // Utility function
-    DListNode* __createNode(T value)
+    DListNode* __createNode(int value)
     {
         DListNode *newNode = \
             (DListNode*) malloc (sizeof(DListNode));
@@ -40,8 +39,7 @@ private:
         return (DListNode*) newNode;
     }
 
-public:
-    List() {
+    void init() {
         _head = _tail = NULL;
         _size = 0;
     }
@@ -50,7 +48,7 @@ public:
         return (_head == NULL && _tail == NULL);
     }
 
-    void pushFront(T value)
+    void pushFront(int value)
     {
         DListNode *newNode = __createNode(value);
         if (newNode) {
@@ -67,7 +65,7 @@ public:
         }
     }
 
-    void pushBack(T value)
+    void pushBack(int value)
     {
         DListNode *newNode = __createNode(value);
         if (newNode) {
@@ -84,7 +82,7 @@ public:
         }
     }
 
-    void insertAt(T value, unsigned index)
+    void insertAt(unsigned index, int value)
     {
         if (index == 0) {
             pushFront(value);
@@ -123,14 +121,14 @@ public:
         }
     }
 
-    T front()
+    int front()
     {
         if (!isEmpty())
             return _head->data;
         exit(-1);
     }
 
-    T back()
+    int back()
     {
         if (!isEmpty())
             return _tail->data;
@@ -182,6 +180,35 @@ public:
 
 int main(int argc, char const *argv[])
 {
+    // Buat objek SinglyList
+    List myList;
+    // PENTING! Jangan lupa di-init()
+    myList.init();
     
+    myList.pushBack(2);
+    myList.pushBack(3);
+    myList.pushBack(4);
+    myList.pushBack(5);
+    myList.pushBack(6);
+    // isi list => [2, 3, 4, 5, 6]
+
+    myList.pushFront(9);
+    myList.pushFront(8);
+    myList.pushFront(7);
+    myList.pushFront(6);
+    // isi list => [6, 7, 8, 9, 2, 3, 4, 5, 6]
+    
+    myList.popFront();
+    myList.popBack();
+    myList.insertAt(2, 11);
+    myList.insertAt(4, 17);
+    // isi list => [7, 8, 11, 9, 17, 2, 3, 4, 5]
+
+    // print list reversed
+    while (!myList.isEmpty()) {
+        printf("%d ", myList.back());
+        myList.popBack();
+    }
+    printf("\n");    
     return 0;
 }
